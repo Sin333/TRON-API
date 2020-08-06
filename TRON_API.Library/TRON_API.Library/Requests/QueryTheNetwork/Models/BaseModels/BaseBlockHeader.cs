@@ -27,6 +27,8 @@ namespace TRON_API.Library.Requests.QueryTheNetwork.Models.BaseModels
         public string ParentHash { get; set; }
 
         [JsonPropertyName("timestamp")]
-        public DateTime Timestamp { get; set; } 
+        public long TimestampTicks { get; set; } 
+        
+        public TimeSpan GetTimestamp() => new TimeSpan(TimestampTicks);
     }
 }

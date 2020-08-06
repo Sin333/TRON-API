@@ -6,7 +6,7 @@ namespace TRON_API.Library
         public readonly string SolidityNodeURL;
 
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="fullNodeUrl">Example: "http://localhost:8090/"</param>
         /// <param name="solidityNodeUrl">Example: "http://localhost:8091/"</param>

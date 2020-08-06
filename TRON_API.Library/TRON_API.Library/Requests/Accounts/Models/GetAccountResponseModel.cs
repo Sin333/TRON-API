@@ -12,7 +12,9 @@ namespace TRON_API.Library.Requests.Accounts.Models
         public long Balance { get; set; }
 
         [JsonPropertyName("create_time")] 
-        public DateTime CreateTime { get; set; }
+        public long CreateTimeTicks { get; set; }
+
+        public TimeSpan GetCreateTime() => new TimeSpan(CreateTimeTicks);
 
         [JsonPropertyName("account_resource")] 
         public object AccountResource { get; set; }

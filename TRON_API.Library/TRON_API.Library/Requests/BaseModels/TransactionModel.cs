@@ -30,10 +30,14 @@ namespace TRON_API.Library.Requests.BaseModels
         public long RefBlockHash { get; set; }
 
         [JsonPropertyName("expiration")] 
-        public DateTime Expiration { get; set; }
+        public long ExpirationTicks { get; set; }
+        
+        public TimeSpan GetExpiration() => new TimeSpan(ExpirationTicks);
 
         [JsonPropertyName("timestamp")] 
-        public DateTime Timestamp { get; set; }
+        public long TimestampTicks { get; set; }
+        
+        public TimeSpan GetTimestamp() => new TimeSpan(TimestampTicks);
     }
 
     public class TransactionContract<T> where T: BaseTransactionContract

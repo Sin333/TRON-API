@@ -36,10 +36,12 @@ namespace TRON_API.Library.Requests.Accounts
         /// <summary>
         ///     Create an account. Uses an already activated account to create a new account
         /// </summary>
+        /// <param name="address">Base58</param>
         /// <returns></returns>
         public async Task<GetAccountResponseModel> GetAccount(string address)
         {
-            var body = JsonSerializer.Serialize(new AddressModel(address));
+            var hexAddress = ConverterHelpers.Base58ToHex(address);
+            var body = JsonSerializer.Serialize(new AddressModel(hexAddress));
             return await HttpHelper.PostAsync<GetAccountResponseModel>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/getaccount",
                 body
