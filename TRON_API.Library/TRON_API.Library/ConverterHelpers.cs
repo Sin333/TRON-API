@@ -7,6 +7,8 @@ namespace TRON_API.Library
     {
         public static decimal SunToTRX(long sunCoinsAmount) => sunCoinsAmount / 1_000_000; 
         
+        public static int TRXToSun(decimal trxCoinsAmount) => (int)(trxCoinsAmount * 1_000_000); 
+        
         public static string Base58ToHex(string base58String)
         {
             static string ByteToHexString(byte element)
