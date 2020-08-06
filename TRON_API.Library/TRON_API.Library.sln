@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TRON_API.Library", "TRON_API.Library\TRON_API.Library.csproj", "{7793BFC0-746D-4B74-999A-5E3076265125}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TRON_API.ConsoleApp", "TRON_API.ConsoleApp\TRON_API.ConsoleApp.csproj", "{8D4CF1EF-FB34-484F-8B9C-BE317490F2CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{7793BFC0-746D-4B74-999A-5E3076265125}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7793BFC0-746D-4B74-999A-5E3076265125}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7793BFC0-746D-4B74-999A-5E3076265125}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D4CF1EF-FB34-484F-8B9C-BE317490F2CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D4CF1EF-FB34-484F-8B9C-BE317490F2CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D4CF1EF-FB34-484F-8B9C-BE317490F2CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D4CF1EF-FB34-484F-8B9C-BE317490F2CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
