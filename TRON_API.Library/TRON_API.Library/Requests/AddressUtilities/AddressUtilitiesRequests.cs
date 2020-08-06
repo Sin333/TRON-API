@@ -35,7 +35,7 @@ namespace TRON_API.Library.Requests.AddressUtilities
         /// <returns></returns>
         public async Task<CreateAddressResponseModel> CreateAddress(string value)
         {
-            var body = JsonSerializer.Serialize(new {value});
+            var body = JsonSerializer.Serialize(new {value}, DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<CreateAddressResponseModel>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/createaddress",
                 body
@@ -49,7 +49,7 @@ namespace TRON_API.Library.Requests.AddressUtilities
         /// <returns></returns>
         public async Task<ValidateAddressResponseModel> ValidateAddress(string address)
         {
-            var body = JsonSerializer.Serialize(new {address});
+            var body = JsonSerializer.Serialize(new {address}, DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<ValidateAddressResponseModel>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/validateaddress",
                 body

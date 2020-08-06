@@ -22,7 +22,7 @@ namespace TRON_API.Library.Requests.QueryTheNetwork
         /// <returns></returns>
         public async Task<GetBlockByNumResponseModel> GetBlockByNum(int num)
         {
-            var body = JsonSerializer.Serialize(new {num});
+            var body = JsonSerializer.Serialize(new {num}, DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<GetBlockByNumResponseModel>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/getblockbynum",
                 body
@@ -36,7 +36,7 @@ namespace TRON_API.Library.Requests.QueryTheNetwork
         /// <returns></returns>
         public async Task<GetBlockByIdResponseModel> GetBlockById(string blockId)
         {
-            var body = JsonSerializer.Serialize(new {value = blockId});
+            var body = JsonSerializer.Serialize(new {value = blockId}, DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<GetBlockByIdResponseModel>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/getblockbyid",
                 body
@@ -51,7 +51,7 @@ namespace TRON_API.Library.Requests.QueryTheNetwork
         [Obsolete("Not tested function!")]
         public async Task<object> GetBlockByLatestNum(int num)
         {
-            var body = JsonSerializer.Serialize(new {num});
+            var body = JsonSerializer.Serialize(new {num}, DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<object>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/getblockbylatestnum",
                 body
@@ -67,7 +67,7 @@ namespace TRON_API.Library.Requests.QueryTheNetwork
         [Obsolete("Not tested function!")]
         public async Task<object> GetBlockByLimitNext(int startNum, int endNum)
         {
-            var body = JsonSerializer.Serialize(new {startNum, endNum});
+            var body = JsonSerializer.Serialize(new {startNum, endNum}, DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<object>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/getblockbylimitnext",
                 body

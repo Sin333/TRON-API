@@ -26,7 +26,7 @@ namespace TRON_API.Library.Requests.AccountResources
         /// <returns></returns>
         public async Task<GetAccountResourceResponseModel> GetAccountResource(string address)
         {
-            var body = JsonSerializer.Serialize(new AddressModel(address));
+            var body = JsonSerializer.Serialize(new AddressModel(address), DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<GetAccountResourceResponseModel>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/getaccountresource",
                 body
@@ -41,7 +41,7 @@ namespace TRON_API.Library.Requests.AccountResources
         public async Task<GetAccountNetResponseModel> GetAccountNet(string address)
         {
             var hexAddress = ConverterHelpers.Base58ToHex(address);
-            var body = JsonSerializer.Serialize(new AddressModel(hexAddress));
+            var body = JsonSerializer.Serialize(new AddressModel(hexAddress), DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<GetAccountNetResponseModel>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/getaccountnet",
                 body
@@ -57,7 +57,7 @@ namespace TRON_API.Library.Requests.AccountResources
         /// <returns></returns>
         public async Task<FreezeBalanceResponseModel> FreezeBalance(FreezeBalanceRequestModel model)
         {
-            var body = JsonSerializer.Serialize(model);
+            var body = JsonSerializer.Serialize(model, DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<FreezeBalanceResponseModel>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/freezebalance",
                 body
@@ -73,7 +73,7 @@ namespace TRON_API.Library.Requests.AccountResources
         [Obsolete("Not tested function!")]
         public async Task<object> UnfreezeBalance(UnfreezeBalanceRequestModel model)
         {
-            var body = JsonSerializer.Serialize(model);
+            var body = JsonSerializer.Serialize(model, DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<object>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/unfreezebalance",
                 body
@@ -89,7 +89,7 @@ namespace TRON_API.Library.Requests.AccountResources
         [Obsolete("Not tested function!")]
         public async Task<object> GetDelegatedResource(GetDelegatedResourceRequestModel model)
         {
-            var body = JsonSerializer.Serialize(model);
+            var body = JsonSerializer.Serialize(model, DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<object>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/getdelegatedresource",
                 body
@@ -105,7 +105,7 @@ namespace TRON_API.Library.Requests.AccountResources
         public async Task<object> GetDelegatedResourceAccountIndex(string address)
         {
             var hexAddress = ConverterHelpers.Base58ToHex(address);
-            var body = JsonSerializer.Serialize(new {value = hexAddress, visible = false});
+            var body = JsonSerializer.Serialize(new {value = hexAddress, visible = false}, DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<object>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/getdelegatedresourceaccountindex",
                 body

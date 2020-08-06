@@ -1,6 +1,6 @@
+using System;
 using System.Text.Json.Serialization;
 using TRON_API.Library.Requests.BaseModels;
-using TRON_API.Library.Requests.BaseModels.TransactionContracts;
 
 namespace TRON_API.Library.Requests.Transactions.Models
 {
@@ -12,12 +12,24 @@ namespace TRON_API.Library.Requests.Transactions.Models
         /// <param name="privateKey">PrivateKey from ownerAddress</param>
         public GetTransactionSignRequestModel(string privateKey, TransactionModel<T> transactionInfo)
         {
+            Visible = transactionInfo.Visible ?? false;
+            TxId = transactionInfo.TxId ?? throw new ArgumentException("TxId is null");
             PrivateKey = privateKey;
-            Transaction = new GetTransactionSignTransactionModel<T>(transactionInfo);
+            Transaction = new GetTransactionSignResponseModel<T>(transactionInfo)
+            {
+                // Visible = null, 
+                // TxId = null
+            };
         }
         
+        [JsonPropertyName("txID")] 
+        public string TxId { get; set; }
+        
+        [JsonPropertyName("visible")]
+        public bool Visible { get; set; }
+
         [JsonPropertyName("transaction")]
-        public GetTransactionSignTransactionModel<T> Transaction { get; set; }
+        public GetTransactionSignResponseModel<T> Transaction { get; set; }
         
         [JsonPropertyName("privateKey")]
         public string PrivateKey { get; set; }

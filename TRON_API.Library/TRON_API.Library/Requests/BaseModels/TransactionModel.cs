@@ -9,7 +9,7 @@ namespace TRON_API.Library.Requests.BaseModels
         public bool? Visible { get; set; }
 
         [JsonPropertyName("txID")] 
-        public string TxId { get; set; }
+        public string? TxId { get; set; }
 
         [JsonPropertyName("raw_data")] 
         public TransactionRawData<T> RawData { get; set; }
@@ -24,10 +24,10 @@ namespace TRON_API.Library.Requests.BaseModels
         public TransactionContract<T>[] Contracts { get; set; } 
         
         [JsonPropertyName("ref_block_bytes")] 
-        public long RefBlockBytes { get; set; }
+        public string RefBlockBytes { get; set; }
 
         [JsonPropertyName("ref_block_hash")] 
-        public long RefBlockHash { get; set; }
+        public string RefBlockHash { get; set; }
 
         [JsonPropertyName("expiration")] 
         public long ExpirationTicks { get; set; }

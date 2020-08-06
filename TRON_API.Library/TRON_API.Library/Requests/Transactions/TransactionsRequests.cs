@@ -3,7 +3,6 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using TRON_API.Library.Helpers;
 using TRON_API.Library.Requests.BaseModels;
-using TRON_API.Library.Requests.BaseModels.TransactionContracts;
 using TRON_API.Library.Requests.Transactions.Models;
 
 namespace TRON_API.Library.Requests.Transactions
@@ -19,14 +18,14 @@ namespace TRON_API.Library.Requests.Transactions
         {
             _tronApiConfiguration = tronApiConfiguration;
         }
-        
+
         /// <summary>
         ///     Create a TRX transfer transaction. If to_address does not exist, then create the account on the blockchain.
         /// </summary>
         /// <returns></returns>
         public async Task<TransactionModel<T>> CreateTransaction<T>(CreateTransactionRequestModel model) where T : BaseTransactionContract
         {
-            var body = JsonSerializer.Serialize(model);
+            var body = JsonSerializer.Serialize(model, DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<TransactionModel<T>>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/createtransaction",
                 body
@@ -40,7 +39,7 @@ namespace TRON_API.Library.Requests.Transactions
         /// <returns></returns>
         public async Task<GetTransactionSignResponseModel<T>> GetTransactionSign<T>(GetTransactionSignRequestModel<T> model) where T : BaseTransactionContract
         {
-            var body = JsonSerializer.Serialize(model);
+            var body = JsonSerializer.Serialize(model, DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<GetTransactionSignResponseModel<T>>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/gettransactionsign",
                 body
@@ -53,7 +52,7 @@ namespace TRON_API.Library.Requests.Transactions
         /// <returns></returns>
         public async Task<BroadcastTransactionResponseModel> BroadcastTransaction<T>(GetTransactionSignResponseModel<T> model) where T : BaseTransactionContract
         {
-            var body = JsonSerializer.Serialize(model);
+            var body = JsonSerializer.Serialize(model, DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<BroadcastTransactionResponseModel>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/broadcasttransaction",
                 body
@@ -67,7 +66,7 @@ namespace TRON_API.Library.Requests.Transactions
         [Obsolete("Not tested function!")]
         public async Task<BroadcastTransactionResponseModel> BroadcastHex(string transaction)
         {
-            var body = JsonSerializer.Serialize(new {transaction});
+            var body = JsonSerializer.Serialize(new {transaction}, DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<BroadcastTransactionResponseModel>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/broadcasthex",
                 body
@@ -81,13 +80,13 @@ namespace TRON_API.Library.Requests.Transactions
         [Obsolete("Not tested function!")]
         public async Task<object> EasyTransfer(EasyTransferRequestModel model)
         {
-            var body = JsonSerializer.Serialize(model);
+            var body = JsonSerializer.Serialize(model, DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<object>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/easytransfer",
                 body
             );
         }
-        
+
         /// <summary>
         ///     Easily transfer from an address using the password string. Only works with accounts created from
         ///     createAddress,integrated getransactionsign and broadcasttransaction.
@@ -96,7 +95,7 @@ namespace TRON_API.Library.Requests.Transactions
         [Obsolete("Not tested function!")]
         public async Task<object> EasyTransferByPrivate(EasyTransferRequestModel model)
         {
-            var body = JsonSerializer.Serialize(model);
+            var body = JsonSerializer.Serialize(model, DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<object>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/easytransferbyprivate",
                 body

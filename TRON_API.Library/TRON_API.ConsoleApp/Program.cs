@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using TRON_API.Library;
 using TRON_API.Library.Requests.Accounts;
-using TRON_API.Library.Requests.BaseModels;
 using TRON_API.Library.Requests.BaseModels.TransactionContracts;
 using TRON_API.Library.Requests.Transactions;
 using TRON_API.Library.Requests.Transactions.Models;
@@ -13,6 +12,7 @@ namespace TRON_API.ConsoleApp
     {
         static async Task Main(string[] args)
         {
+            // It's test api urls and test accounts
             var tronConfig = new TronApiConfiguration("https://api.shasta.trongrid.io/", "https://api.shasta.trongrid.io/");
 
             const string ownerAddress = "TLFXzKWczwZJbrVz3QEsrnH2F4zb4BeFqh";
@@ -24,8 +24,8 @@ namespace TRON_API.ConsoleApp
             const string toAddress = "TL6tL2sTsMRErMx5aCQ7sG2bsrck93w8q8";
             var amount = new decimal(0.5); //0.5TRX
             var createTransactionRequestModel = new CreateTransactionRequestModel(
-                ConverterHelpers.Base58ToHex(toAddress),
-                ConverterHelpers.Base58ToHex(ownerAddress), 
+                toAddress,
+                ownerAddress,
                 amount);
             var createTransaction = await transactionRequests.CreateTransaction<CreateTransactionContract>(createTransactionRequestModel);
             

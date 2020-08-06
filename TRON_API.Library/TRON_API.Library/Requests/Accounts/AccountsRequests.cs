@@ -26,7 +26,7 @@ namespace TRON_API.Library.Requests.Accounts
         [Obsolete("Not tested function!")]
         public async Task<object> CreateAccount(CreateAccountRequestModel model)
         {
-            var body = JsonSerializer.Serialize(model);
+            var body = JsonSerializer.Serialize(model, DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<object>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/createaccount",
                 body
@@ -41,7 +41,7 @@ namespace TRON_API.Library.Requests.Accounts
         public async Task<GetAccountResponseModel> GetAccount(string address)
         {
             var hexAddress = ConverterHelpers.Base58ToHex(address);
-            var body = JsonSerializer.Serialize(new AddressModel(hexAddress));
+            var body = JsonSerializer.Serialize(new AddressModel(hexAddress), DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<GetAccountResponseModel>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/getaccount",
                 body
@@ -55,7 +55,7 @@ namespace TRON_API.Library.Requests.Accounts
         [Obsolete("Not tested function!")]
         public async Task<UpdateAccountResponseModel> UpdateAccount(UpdateAccountRequestModel model)
         {
-            var body = JsonSerializer.Serialize(model);
+            var body = JsonSerializer.Serialize(model, DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<UpdateAccountResponseModel>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/updateaccount",
                 body
@@ -70,7 +70,7 @@ namespace TRON_API.Library.Requests.Accounts
         [Obsolete("Not finishing function!")]
         public async Task<object> AccountPermissionUpdate(object model)
         {
-            var body = JsonSerializer.Serialize(model);
+            var body = JsonSerializer.Serialize(model, DefaultJsonOptions.GetDefaultJsonOptions());
             return await HttpHelper.PostAsync<object>(
                 $"{_tronApiConfiguration.FullNodeURL}wallet/accountpermissionupdate",
                 body
