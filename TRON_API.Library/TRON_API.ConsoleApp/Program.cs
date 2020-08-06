@@ -27,7 +27,7 @@ namespace TRON_API.ConsoleApp
                 ConverterHelpers.Base58ToHex(toAddress),
                 ConverterHelpers.Base58ToHex(ownerAddress), 
                 amount);
-            var createTransaction = await transactionRequests.CreateTransaction<BaseTransactionContract>(createTransactionRequestModel);
+            var createTransaction = await transactionRequests.CreateTransaction<CreateTransactionContract>(createTransactionRequestModel);
             
             const string privateKeyOwnerAddress = "225DDC32C0CFEA1F12E8B3B1773429C1A85DFC239BF7845C51CA927751EFE6C1";
             var getTransactionSignRequestModel = new GetTransactionSignRequestModel<CreateTransactionContract>(
