@@ -10,11 +10,11 @@ namespace TRON_API.Library.Requests.Transactions.Models
         /// <param name="passPhrase"></param>
         /// <param name="toAddress">Base58</param>
         /// <param name="amount"></param>
-        public EasyTransferRequestModel(string passPhrase, string toAddress, int amount)
+        public EasyTransferRequestModel(string passPhrase, string toAddress, decimal amount)
         {
             PassPhrase = passPhrase;
             ToAddress = ConverterHelpers.Base58ToHex(toAddress);
-            Amount = amount;
+            Amount = ConverterHelpers.TRXToSun(amount);
         }
 
         [JsonPropertyName("passPhrase")]

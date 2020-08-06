@@ -12,25 +12,28 @@ namespace TRON_API.Library.Requests.AccountResources.Models
         /// <param name="frozenBalance"></param>
         /// <param name="frozenDuration"></param>
         /// <param name="resource">must be -> ENERGY or BANDWIDTH</param>
+        /// <param name="receiverAddress">Optional not required</param>
+        /// <param name="permissionId">Optional not required</param>
+        /// <param name="visible">Optional not required</param>
         public FreezeBalanceRequestModel(
             string ownerAddress,
-            long frozenBalance,
-            int frozenDuration,
-            string resource,
+            decimal frozenBalance,
+            int frozenDuration = 3,
+            string resource = "BANDWIDTH",
             string? receiverAddress = null,
             int? permissionId = null,
             bool? visible = null)
         {
             OwnerAddress = ConverterHelpers.Base58ToHex(ownerAddress);
+            FrozenBalance = ConverterHelpers.TRXToSun(frozenBalance);
             FrozenDuration = frozenDuration;
             if(resource != "ENERGY" || resource != "BANDWIDTH")
                 throw new ArgumentException("Invalid 'resource' field");
-            
             Resource = resource;
+            
+            ReceiverAddress = receiverAddress;
             PermissionId = permissionId;
             Visible = visible;
-            ReceiverAddress = receiverAddress;
-            FrozenBalance = frozenBalance;
         }
         
         [JsonPropertyName("owner_address")]

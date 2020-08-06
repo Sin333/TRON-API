@@ -4,11 +4,19 @@ namespace TRON_API.Library.Requests.Transactions.Models
 {
     public class CreateTransactionRequestModel
     {
-        public CreateTransactionRequestModel(string toAddress, string ownerAddress, long amount, int? permissionId = null, bool? visible = null)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="toAddress">Base58</param>
+        /// <param name="ownerAddress">Base58</param>
+        /// <param name="amount">SUN</param>
+        /// <param name="permissionId">Optional not required</param>
+        /// <param name="visible">Optional not required</param>
+        public CreateTransactionRequestModel(string toAddress, string ownerAddress, decimal amount, int? permissionId = null, bool? visible = null)
         {
-            ToAddress = toAddress;
-            OwnerAddress = ownerAddress;
-            Amount = amount;
+            ToAddress = ConverterHelpers.Base58ToHex(toAddress);
+            OwnerAddress = ConverterHelpers.Base58ToHex(ownerAddress);
+            Amount = ConverterHelpers.TRXToSun(amount);
             PermissionId = permissionId;
             Visible = visible;
         }

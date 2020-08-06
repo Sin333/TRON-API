@@ -2,15 +2,15 @@ using System.Text.Json.Serialization;
 
 namespace TRON_API.Library.Requests.BaseModels.TransactionContracts
 {
-    public class GetTransactionSignContract : BaseTransactionContract
+    public class CreateTransactionContract : BaseTransactionContract
     {
         [JsonPropertyName("amount")]
-        public long Amount { get; set; }
+        public int Amount { get; set; }
         
         [JsonPropertyName("owner_address")]
-        public long OwnerAddress { get; set; }
+        public string OwnerAddress { get; set; }
         
         [JsonPropertyName("to_address")]
-        public long ToAddress { get; set; }
+        public string ToAddress { get; set; }
     }
 }
