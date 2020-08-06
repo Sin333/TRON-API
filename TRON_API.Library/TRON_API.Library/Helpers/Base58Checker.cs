@@ -11,7 +11,7 @@ namespace TRON_API.Library.Helpers
         private const string DIGITS = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 
         /// <summary>
-        /// Encodes data with a 4-byte checksum
+        ///     Encodes data with a 4-byte checksum
         /// </summary>
         /// <param name="data">Data to be encoded</param>
         /// <returns></returns>
@@ -21,7 +21,7 @@ namespace TRON_API.Library.Helpers
         }
 
         /// <summary>
-        /// Encodes data in plain Base58, without any checksum.
+        ///     Encodes data in plain Base58, without any checksum.
         /// </summary>
         /// <param name="data">The data to be encoded</param>
         /// <returns></returns>
@@ -40,16 +40,14 @@ namespace TRON_API.Library.Helpers
             }
 
             // Append `1` for each leading 0 byte
-            for (var i = 0; i < data.Length && data[i] == 0; i++)
-            {
+            for (var i = 0; i < data.Length && data[i] == 0; i++) 
                 result = '1' + result;
-            }
 
             return result;
         }
 
         /// <summary>
-        /// Decodes data in Base58Check format (with 4 byte checksum)
+        ///     Decodes data in Base58Check format (with 4 byte checksum)
         /// </summary>
         /// <param name="data">Data to be decoded</param>
         /// <returns>Returns decoded data if valid; throws FormatException if invalid</returns>
@@ -58,16 +56,14 @@ namespace TRON_API.Library.Helpers
             var dataWithCheckSum = DecodePlain(data);
             var dataWithoutCheckSum = _VerifyAndRemoveCheckSum(dataWithCheckSum);
 
-            if (dataWithoutCheckSum == null)
-            {
+            if (dataWithoutCheckSum == null) 
                 throw new FormatException("Base58 checksum is invalid");
-            }
 
             return dataWithoutCheckSum;
         }
 
         /// <summary>
-        /// Decodes data in plain Base58, without any checksum.
+        ///     Decodes data in plain Base58, without any checksum.
         /// </summary>
         /// <param name="data">Data to be decoded</param>
         /// <returns>Returns decoded data if valid; throws FormatException if invalid</returns>
@@ -75,14 +71,12 @@ namespace TRON_API.Library.Helpers
         {
             // Decode Base58 string to BigInteger 
             BigInteger intData = 0;
-            for (var i = 0; i < data.Length; i++)
+            foreach (var symbolItem in data)
             {
-                var digit = DIGITS.IndexOf(data[i]); //Slow
+                var digit = DIGITS.IndexOf(symbolItem); //Slow
 
-                if (digit < 0)
-                {
-                    throw new FormatException($"Invalid Base58 character `{data[i]}` at position {i}");
-                }
+                if (digit < 0) 
+                    throw new FormatException($"Invalid Base58 character `{symbolItem}` at position {data.IndexOf(symbolItem)}");
 
                 intData = intData * 58 + digit;
             }
@@ -91,11 +85,12 @@ namespace TRON_API.Library.Helpers
             // Leading zero bytes get encoded as leading `1` characters
             var leadingZeroCount = data.TakeWhile(c => c == '1').Count();
             var leadingZeros = Enumerable.Repeat((byte) 0, leadingZeroCount);
-            var bytesWithoutLeadingZeros =
-                intData.ToByteArray()
-                    .Reverse() // to big endian
-                    .SkipWhile(b => b == 0); //strip sign byte
-            var result = leadingZeros.Concat(bytesWithoutLeadingZeros).ToArray();
+            var bytesWithoutLeadingZeros = intData.ToByteArray()
+                .Reverse() // to big endian
+                .SkipWhile(b => b == 0); //strip sign byte
+            var result = leadingZeros
+                .Concat(bytesWithoutLeadingZeros)
+                .ToArray();
 
             return result;
         }
@@ -109,7 +104,7 @@ namespace TRON_API.Library.Helpers
         }
 
         //Returns null if the checksum is invalid
-        private static byte[] _VerifyAndRemoveCheckSum(byte[] data)
+        private static byte[]? _VerifyAndRemoveCheckSum(byte[] data)
         {
             var result = ArrayHelpers.SubArray(data, 0, data.Length - CHECK_SUM_SIZE);
             var givenCheckSum = ArrayHelpers.SubArray(data, data.Length - CHECK_SUM_SIZE);
